@@ -1,21 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
+import { movies } from './reviews';
+import { useState } from 'react';
+
+
+const addTodo = () => {
+  if (todoName) {
+    const newTodo = {
+      id: todos.length + 1,
+      name: todoName,
+      completed: false,
+      confidence: parseInt(confidence, 10),
+    };
+    setTodos([...todos, newTodo]); 
+    setTodoName(""); 
+    setConfidence(5); 
+  }
+};
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Review Movies
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+        <a>
+        
         </a>
       </header>
     </div>
