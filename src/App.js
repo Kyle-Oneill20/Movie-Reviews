@@ -1,34 +1,38 @@
-import logo from './logo.svg';
+
 import './App.css';
-import { movies } from './reviews';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Navigation from './Movies'
 
-
-const addTodo = () => {
-  if (todoName) {
-    const newTodo = {
-      id: todos.length + 1,
-      name: todoName,
-      completed: false,
-      confidence: parseInt(confidence, 10),
-    };
-    setTodos([...todos, newTodo]); 
-    setTodoName(""); 
-    setConfidence(5); 
-  }
-};
 
 function App() {
+
+  const [data, setData] = useState();
+
+  const URL1 = "https://65467038fe036a2fa955b0c7.mockapi.io/api/1/Movies"
+  function getData() {
+    fetch(URL1)
+    .then(Response => Response.json())
+    .then(data => setData(data))
+  }
+  useEffect(() =>{
+  getData();
+}, [])
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Review Movies
-        </p>
-        <a>
-        
-        </a>
-      </header>
+      {data && data.map((Movies,index)=> {
+      return (
+        <div key={index}>
+        <p>{Movies.Title}</p>
+        <p>{Movies.synopsis}</p>
+       <Navigation></Navigation>
+        </div>
+ 
+      )
+      }
+      )}
     </div>
   );
 }
